@@ -1,5 +1,15 @@
 {
-  "extends": [
-    "config:base"
+  "extends": ["config:base", "group:monorepos"],
+  "schedule": ["every weekend"],
+  "semanticCommits": "auto",
+  "rangeStrategy": "bump",
+  "rebaseLabel": "rebase",
+  "rebaseWhen": "auto",
+  "requiredStatusChecks": [],
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
   ]
 }
