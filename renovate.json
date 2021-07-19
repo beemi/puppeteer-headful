@@ -10,6 +10,12 @@
     {
       "updateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["node"],
+      "versioning": "pep440",
+      "automerge": true
     }
   ]
 }
