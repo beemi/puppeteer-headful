@@ -1,0 +1,5 @@
+name: 'Puppeteer headful'
+description: 'Liqulity wallet puppeter headful'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
