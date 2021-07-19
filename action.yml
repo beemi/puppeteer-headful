@@ -1,5 +1,9 @@
-name: 'Puppeteer Headful'
-description: 'Puppeteer Headful'
+name: 'Puppeteer Headful GitHub Action'
+description: 'Puppeteer Headful Container to GitHub Action'
+author: 'Beemi Raja'
 runs:
   using: 'docker'
   image: 'Dockerfile'
+branding:
+  icon: 'arrow-up-left'
+  color: 'orange'

@@ -1,6 +1,6 @@
-# Puppeteer Headful GitHub Actions
+# Puppeteer Headful GitHub Action Container
 
-This repository contains the [puppeteer](https://developers.google.com/web/tools/puppeteer) Headful docker image, Container is avilabel to Github Actions
+This repository contains the [puppeteer](https://developers.google.com/web/tools/puppeteer) Headful docker image, Container is available to GitHub Actions.
 
 ## Usage
 ```
@@ -46,6 +46,5 @@ browser = await puppeteer.launch({
 });
 
 ```
-
 # contact
 [beemi.raja@gmail.com](beemi.raja@gmail.com)
