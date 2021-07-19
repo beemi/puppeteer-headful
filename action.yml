@@ -1,5 +1,5 @@
-name: 'Puppeteer headful'
-description: 'Liqulity wallet puppeter headful'
+name: 'Puppeteer Headful'
+description: 'Puppeteer Headful'
 runs:
   using: 'docker'
   image: 'Dockerfile'
