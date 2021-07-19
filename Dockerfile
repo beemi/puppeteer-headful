@@ -13,7 +13,7 @@ RUN  apt-get update \
      && mkdir -p ~/.fonts && mv *.ttf ~/.fonts \
      && mkdir -p ~/.config/fontconfig \
      && cp /fonts.conf ~/.config/fontconfig \
-     &&  fc-cache -f -v \
+     && fc-cache -f -v \
      && apt-get install -yq libgconf-2-4 \
      && apt-get install -y ca-certificates wget xvfb dbus dbus-x11 build-essential --no-install-recommends \
      && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
