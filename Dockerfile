@@ -12,6 +12,8 @@ RUN  apt-get update \
      && apt-get install -y chromium google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
         --no-install-recommends \
      && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+     && wget --quiet https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O /usr/sbin/wait-for-it.sh \
+     && chmod +x /usr/sbin/wait-for-it.sh
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
