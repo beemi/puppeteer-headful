@@ -10,7 +10,8 @@ RUN  apt-get update \
      && cd "$(mktemp -d)" \
      && wget https://noto-website.storage.googleapis.com/pkgs/NotoColorEmoji-unhinted.zip \
      && unzip NotoColorEmoji-unhinted.zip \
-     && mkdir -p ~/.fonts && mv *.ttf ~/.fonts \
+     && mkdir -p ~/.fonts \
+     && mv *.ttf ~/.fonts \
      && mkdir -p ~/.config/fontconfig \
      && cp /fonts.conf ~/.config/fontconfig \
      && fc-cache -f -v \
