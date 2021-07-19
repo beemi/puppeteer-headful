@@ -28,4 +28,6 @@ COPY README.md /
 
 COPY entrypoint.sh /entrypoint.sh
 
+RUN chmod +x *.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
