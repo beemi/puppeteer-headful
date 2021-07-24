@@ -1,6 +1,11 @@
-# Puppeteer Headful GitHub Action Container
 
-This repository contains the [puppeteer](https://developers.google.com/web/tools/puppeteer) Headful docker image, Container is available to GitHub Actions.
+<a href="https://developers.google.com/web/tools/puppeteer">
+    <img src="https://developers.google.com/web/tools/images/puppeteer.png?w=250" alt="Aimeos logo" title="Aimeos" align="right" height="100" />
+</a>
+
+#Puppeteer Headful GitHub Action Container
+
+This repository contains the [puppeteer](https://developers.google.com/web/tools/puppeteer) Headful docker image, Container is available to [GitHub Actions](https://github.com/marketplace/actions/puppeteer-headful-github-action).
 
 ## Usage
 ```
