@@ -21,7 +21,7 @@ RUN  apt-get update \
 #     && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
      && curl -LO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
      && apt-get install -y ./google-chrome-stable_current_amd64.deb \
-     && rm google-chrome-stable_current_amd64.deb
+     && rm google-chrome-stable_current_amd64.deb \
      && apt -f install \
      && apt-get update \
      && apt-get install -y fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 --no-install-recommends \
