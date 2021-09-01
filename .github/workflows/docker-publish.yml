@@ -15,6 +15,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.store.outputs.version }}
     permissions:
       contents: read
       packages: write
@@ -22,6 +24,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Create release
+        id: release
+        uses: rymndhng/release-on-push-action@v0.18.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          bump_version_scheme: minor
+
+      - name: Store release version
+        id: store
+        run: echo "::set-output name=version::${{steps.release.outputs.version}}"
 
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name != 'pull_request'
@@ -42,5 +56,7 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{steps.release.outputs.version}}
           labels: ${{ steps.meta.outputs.labels }}
+
+
