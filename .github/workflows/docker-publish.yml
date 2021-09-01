@@ -17,9 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.store.outputs.version }}
-    permissions:
-      contents: read
-      packages: write
 
     steps:
       - name: Checkout repository
@@ -27,11 +24,18 @@ jobs:
 
       - name: Create release
         id: release
-        uses: rymndhng/release-on-push-action@master
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          bump_version_scheme: minor
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - Just CI Changes
+            - No functional changes
+          draft: false
+          prerelease: false
 
       - name: Store release version
         id: store
