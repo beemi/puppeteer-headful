@@ -16,7 +16,7 @@ RUN  apt-get update \
      && cp /fonts.conf ~/.config/fontconfig \
      && fc-cache -f -v \
      && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-     && sudo sh -c "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >>   /etc/apt/sources.list" \
+     && sh -c "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >>   /etc/apt/sources.list" \
      && apt-get update \
      && apt-get install -y chromium google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 --no-install-recommends \
      && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
