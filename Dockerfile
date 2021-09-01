@@ -16,10 +16,10 @@ RUN  apt-get update \
      && cp /fonts.conf ~/.config/fontconfig \
      && fc-cache -f -v \
      && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-     && apt-get update -y \
-     && sh -c "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >>   /etc/apt/sources.list.d/google-chrome.list" \
+#     && sh -c "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >>   /etc/apt/sources.list.d/google-chrome.list" \
      && apt-get update \
      && apt-get install -y chromium google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 --no-install-recommends \
+     && cat /etc/apt/sources.list.d/google-chrome.list
      && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
