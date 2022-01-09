@@ -48,6 +48,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{steps.release.outputs.version}}
           secrets: |
+            username: ${{ github.actor }}
             GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
 
