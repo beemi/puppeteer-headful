@@ -8,7 +8,6 @@ on:
     branches: [ master ]
 
 env:
-  REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
@@ -20,7 +19,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - id: release
+      - name: Create a Release
+        id: create_release
         uses: rymndhng/release-on-push-action@master
         with:
           bump_version_scheme: patch
@@ -29,14 +29,14 @@ jobs:
 
       - name: Check Output Parameters
         run: |
-          echo "Got tag name ${{ steps.release.outputs.tag_name }}"
-          echo "Got release version ${{ steps.release.outputs.version }}"
+          echo "Got tag name ${{ steps.create_release.outputs.tag_name }}"
+          echo "Got release version ${{ steps.create_release.outputs.version }}"
 
       - name: Login to DockerHub
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v1.12.0
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -46,7 +46,7 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{steps.release.outputs.version}}
+          tags: ${{steps.create_release.outputs.version}}
           secrets: |
             username: ${{ github.actor }}
             GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
