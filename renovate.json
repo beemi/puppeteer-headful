@@ -1,5 +1,6 @@
 {
   "extends": ["config:base", "group:monorepos"],
+  "includePaths": ["package.json"],
   "schedule": ["every weekend"],
   "semanticCommits": "auto",
   "rangeStrategy": "bump",
@@ -8,13 +9,6 @@
   "requiredStatusChecks": [],
   "packageRules": [
     {
-      "updateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["node"],
-      "versioning": "pep440",
       "automerge": true
     }
   ]
