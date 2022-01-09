@@ -13,33 +13,24 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.store.outputs.version }}
-
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create release
-        id: release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - id: release
+        uses: rymndhng/release-on-push-action@master
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - Just CI Changes
-            - No functional changes
-          draft: false
-          prerelease: false
+          bump_version_scheme: patch
+          tag_prefix: v
+          release_body: ':rocket: :tada: PROD Release :rocket: :tada: :tada:'
 
-      - name: Store release version
-        id: store
-        run: echo "::set-output name=version::${{steps.release.outputs.version}}"
+      - name: Check Output Parameters
+        run: |
+          echo "Got tag name ${{ steps.release.outputs.tag_name }}"
+          echo "Got release version ${{ steps.release.outputs.version }}"
 
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name != 'pull_request'
