@@ -1,12 +1,15 @@
-name: Docker
+name: Create and publish a Docker image
 
 on:
   push:
-    branches: [ master ]
-    tags: [ 'v*' ]
+    branches:
+        - master
+    tags:
+        - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 env:
-  IMAGE_NAME: ${{ github.repository }}
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }} # puppeteer-headful
 
 jobs:
   build:
@@ -17,24 +20,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create a Release
-        id: create_release
-        uses: rymndhng/release-on-push-action@v0.23.1
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
         with:
-          bump_version_scheme: patch
-          tag_prefix: v
-          release_body: ':rocket: :tada: PROD Release :rocket: :tada: :tada:'
-
-      - name: Check Output Parameters
-        run: |
-          echo "Got tag name ${{ steps.create_release.outputs.tag_name }}"
-          echo "Got release version ${{ steps.create_release.outputs.version }}"
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Login to DockerHub
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v2.0.0
         with:
-          registry: ghcr.io
+          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -44,10 +40,21 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{steps.create_release.outputs.version}}
-          secrets: |
-            GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
-            github_token=${{ secrets.GITHUB_TOKEN }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+#      - name: Create a Release
+#        id: create_release
+#        uses: rymndhng/release-on-push-action@v0.23.1
+#        with:
+#          bump_version_scheme: patch
+#          tag_prefix: v
+#          release_body: ':rocket: :tada: PROD Release :rocket: :tada: :tada:'
+
+#
+#      - name: Check Output Parameters
+#        run: |
+#          echo "Got tag name ${{ steps.create_release.outputs.tag_name }}"
+#          echo "Got release version ${{ steps.create_release.outputs.version }}"
 
 
 
